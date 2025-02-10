@@ -21,8 +21,19 @@ This is a real-time chat application built using **Next.js** with the **app dire
 
 ## Setup and Installation
 
-1. Clone the repository:
-
+1. Install dependencies:
    ```bash
-   git clone <repository-url>
-   cd real-time-chat-app
+   npm install
+2. Set up environment variables:
+   ```bash
+   NEXTAUTH_URL=http://localhost:3000
+MONGODB_URI=<Your-MongoDB-URI>
+NEXTAUTH_SECRET=<Your-NextAuth-Secret>
+CLOUDINARY_URL=<Your-Cloudinary-URL> (if using Cloudinary for image upload)
+3. Run the development server:
+   ```bash
+   npm run dev
+4.Open the app in your browser:
+   ```bash
+   http://localhost:3000
+
