@@ -53,3 +53,29 @@ Follow these steps to run the project locally 👇
 ```bash
 git clone https://github.com/Pradyuman123soft/Real-Time-Chat-App.git
 cd Real-Time-Chat-App
+
+### 2️⃣ — Install dependencies for both backend and frontend
+```bash
+cd Bcakend-for-websocket
+npm install
+
+cd ../client
+npm install
+
+### 3️⃣ — Set up Environment Variables
+
+Create the following .env files before running the app.
+
+```bash
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5000
+
+##👨‍💻 Author
+
+###Pradyuman Chauhan
+**💼 MERN Stack Developer | 💡 Passionate about building scalable real-time web apps
+
+🔗 GitHub: Pradyuman123soft
+
+📧 Email: pradyumanthakur9058532935@gmail.com
