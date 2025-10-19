@@ -55,7 +55,7 @@ git clone https://github.com/Pradyuman123soft/Real-Time-Chat-App.git
 cd Real-Time-Chat-App
 
 ### 2️⃣ — Install dependencies for both backend and frontend
-```bash
+
 cd Bcakend-for-websocket
 npm install
 
@@ -66,7 +66,7 @@ npm install
 
 Create the following .env files before running the app.
 
-```bash
+
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 PORT=5000
