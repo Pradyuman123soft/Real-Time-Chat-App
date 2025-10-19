@@ -73,7 +73,7 @@ PORT=5000
 ```
 ---
 
-##👨‍💻 Author
+## 👨‍💻 Author
 
 -**Pradyuman Chauhan**
 **💼 MERN Stack Developer | 💡 Passionate about building scalable real-time web apps**
