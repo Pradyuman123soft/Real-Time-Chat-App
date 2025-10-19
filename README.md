@@ -71,10 +71,12 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 PORT=5000
 ```
+---
+
 ##👨‍💻 Author
 
-###Pradyuman Chauhan
-**💼 MERN Stack Developer | 💡 Passionate about building scalable real-time web apps
+-**Pradyuman Chauhan**
+**💼 MERN Stack Developer | 💡 Passionate about building scalable real-time web apps**
 
 🔗 GitHub: Pradyuman123soft
 
