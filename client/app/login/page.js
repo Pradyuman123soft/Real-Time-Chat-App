@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -173,7 +174,7 @@ const router = useRouter();
           <div className="flex flex-col mt-4 items-center justify-center text-sm">
             {isLogin ? (
           <p className="text-gray-500 text-sm">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <button
               onClick={() => SetisLogin(false)}
               className="text-blue-400 hover:underline transition-all duration-200"
@@ -201,7 +202,9 @@ const router = useRouter();
               href={"#"}
               className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
             >
-              <img
+              <Image
+                width={25}
+                height={25}
                 className="max-w-[25px]"
                 src="https://ucarecdn.com/8f25a2ba-bdcf-4ff1-b596-088f330416ef/"
                 alt="Google"
@@ -211,7 +214,9 @@ const router = useRouter();
               href={"#"}
               className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
             >
-              <img
+              <Image
+                width={25}
+                height={25}
                 className="max-w-[25px]"
                 src="https://ucarecdn.com/95eebb9c-85cf-4d12-942f-3c40d7044dc6/"
                 alt="Linkedin"
@@ -221,7 +226,9 @@ const router = useRouter();
               onClick = {()=>{signIn("github")}}
               className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
             >
-              <img
+              <Image
+                width={25}
+                height={25}
                 className="max-w-[25px] filter dark:invert"
                 src="https://ucarecdn.com/be5b0ffd-85e8-4639-83a6-5162dfa15a16/"
                 alt="Github"
@@ -231,7 +238,9 @@ const router = useRouter();
               href={"#"}
               className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
             >
-              <img
+              <Image
+                width={25}
+                height={25}
                 className="max-w-[25px]"
                 src="https://ucarecdn.com/6f56c0f1-c9c0-4d72-b44d-51a79ff38ea9/"
                 alt="Facebook"
@@ -241,7 +250,9 @@ const router = useRouter();
               href={"#"}
               className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
             >
-              <img
+              <Image
+                width={25}
+                height={25}
                 className="max-w-[25px] dark:gray-100"
                 src="https://ucarecdn.com/82d7ca0a-c380-44c4-ba24-658723e2ab07/"
                 alt="twitter"
@@ -252,7 +263,9 @@ const router = useRouter();
               href={"#"}
               className="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
             >
-              <img
+              <Image
+                width={25}
+                height={25}
                 className="max-w-[25px]"
                 src="https://ucarecdn.com/3277d952-8e21-4aad-a2b7-d484dad531fb/"
                 alt="apple"
