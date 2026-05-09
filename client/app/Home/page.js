@@ -75,7 +75,20 @@ export default function home() {
     FetchData()
     if (socket) {
       socket.on("message", (msg) => {
-        setMessages((prev) => [...prev, msg]);
+        console.log("📨 Received real-time message:", msg);
+        // Only add if it's not already in messages (prevent duplicates)
+        setMessages((prev) => {
+          const exists = prev.some(existingMsg =>
+            existingMsg.sender === msg.sender &&
+            existingMsg.receiver === msg.receiver &&
+            existingMsg.text === msg.text &&
+            Math.abs(new Date(existingMsg.createdAt || existingMsg.timestamp) - new Date(msg.createdAt || msg.timestamp)) < 1000 // Within 1 second
+          );
+          if (!exists) {
+            return [...prev, msg];
+          }
+          return prev;
+        });
       });
     }
 
@@ -100,41 +113,66 @@ export default function home() {
 
   // lets save the send message in database
   const sendMessage = async () => {
-    if (socket && message.trim()) {
-      socket.emit("message", message);
-      setMessage("");
-    }
-    try {
-      const res = await fetch("/api/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", // Make sure this header is set
-        },
-        body: JSON.stringify({
-          sender: user.email,
-          receiver: selectdUser.email,
-          text: message,
-        }),
-      });
+    if (socket && message.trim() && selectdUser && user) {
+      const messageData = {
+        sender: user.email,
+        receiver: selectdUser.email,
+        text: message,
+        createdAt: new Date().toISOString(), // Use createdAt to match database
+        _id: Date.now().toString() // Temporary ID for local state
+      };
 
-      if (!res.ok) {
-        const errorText = await res.text(); // Get the HTML response body
-        console.error("❌ Error sending message:", errorText);
-        alert("Failed to send message. Please try again.");
-        return;
+      console.log("📤 Sending message:", messageData);
+
+      // Immediately add message to sender's view
+      setMessages((prev) => [...prev, messageData]);
+
+      // Emit message to socket server (for other clients)
+      socket.emit("message", messageData);
+
+      // Also save to database
+      try {
+        const res = await fetch("/api/messages", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sender: user.email,
+            receiver: selectdUser.email,
+            text: message,
+          }),
+        });
+
+        if (!res.ok) {
+          const errorText = await res.text();
+          console.error("❌ Error sending message:", errorText);
+          alert("Failed to send message. Please try again.");
+          // Remove the message from local state if save failed
+          setMessages((prev) => prev.filter(msg => msg._id !== messageData._id));
+          return;
+        }
+
+        const savedMessage = await res.json();
+        console.log("💾 Message saved to database:", savedMessage);
+
+        // Update the temporary message with the real database message
+        setMessages((prev) =>
+          prev.map(msg =>
+            msg._id === messageData._id ? savedMessage : msg
+          )
+        );
+
+      } catch (error) {
+        console.error("❌ Error in sending message:", error);
+        alert("An error occurred while sending the message.");
+        // Remove the message from local state if save failed
+        setMessages((prev) => prev.filter(msg => msg._id !== messageData._id));
       }
 
-      const newMessage = await res.json();
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-    } catch (error) {
-      console.error("❌ Error in sending message:", error);
-      alert("An error occurred while sending the message.");
+      setMessage("");
     }
   };
-
-  socket?.on("message", (msg) => {
-    setMessages((prev) => [...prev, msg]);
-  });
 
   //   this is all for searchbar
   const handleUserClick = async (userId) => {

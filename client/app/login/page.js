@@ -26,7 +26,7 @@ const router = useRouter();
  const handleLogin = async(e) => {
   e.preventDefault();
   try {
-    const res = await fetch('api/login',{
+    const res = await fetch('/api/login',{
       method: "POST",
       headers:{"content-type":"application/json"},
       body: JSON.stringify({
@@ -34,15 +34,7 @@ const router = useRouter();
         password: form.password
       }),
     })
-  let data;
-  try {
-    data = await res.json();
-  } catch (error) {
-    errorData = await res.json();
-    console.log(errorData)
-    throw new Error("Invalid Server Response");
-    
-  }
+    const data = await res.json();
     if(res.ok && data.token){
       localStorage.setItem("token",data.token)
       alert("User logged in succesfully")
@@ -53,6 +45,7 @@ const router = useRouter();
     }
   } catch (error) {
     console.log("logged in error",error)
+    alert("An error occurred during login")
   }
    }
     
@@ -65,7 +58,7 @@ const router = useRouter();
     return;
   }
   try {
-    const res = await fetch('api/register',{
+    const res = await fetch('/api/register',{
       method:"POST",
       headers:{"content-type":"application/json"},
       body:JSON.stringify({
@@ -85,7 +78,7 @@ const router = useRouter();
     }
     
   } catch (error) {
-        console.error("Register error:", err);
+        console.error("Register error:", error);
     alert("Something went wrong, please try again!");
   }
  }

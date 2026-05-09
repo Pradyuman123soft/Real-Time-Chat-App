@@ -45,6 +45,6 @@ export async function POST(req){
         }),{status:200})
     } catch (error) {
         console.log("Login error",error)
-        return new Response(JSON.stringify({message:"Error Loging in"}),{status404})
+        return new Response(JSON.stringify({message:"Error Loging in"}),{status:500})
     }
 }

@@ -27,7 +27,7 @@ export default function dashboard() {
       return;
     }
     else{FetchData();}
-  }, [setValue, token]);
+  }, [setValue, token, route]);
 
   async function FetchData() {
       try {
